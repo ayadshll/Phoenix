@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جاري الانتقال...</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            direction: rtl;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>جاري تحويلك إلى الموقع الجديد...</h2>
+    <p>سيتم نقلك تلقائياً خلال <span id="countdown">3</span> ثوانٍ.</p>
+    
+    <!-- زر للانتقال الفوري -->
+    <button onclick="navigateToSite()">انتقل الآن دون انتظار</button>
+
+    <script>
+        const targetUrl = "https://phoenx-abh.web.app/";
+        let timeLeft = 3; // عدد الثواني قبل التحويل
+
+        // دالة الانتقال
+        function navigateToSite() {
+            window.location.href = targetUrl;
+        }
+
+        // عداد تنازلي للتحويل التلقائي
+        const downloadTimer = setInterval(function() {
+            timeLeft--;
+            document.getElementById("countdown").textContent = timeLeft;
+            
+            if (timeLeft <= 0) {
+                clearInterval(downloadTimer);
+                navigateToSite(); // الانتقال عند انتهاء الوقت
+            }
+        }, 1000); // تحديث كل ثانية
+    </script>
+
+</body>
+</html>
