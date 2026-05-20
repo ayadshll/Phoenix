@@ -1421,140 +1421,27 @@ body.lang-en .page-header,.lang-en .chat-header{flex-direction:row}
 
 /* ===== TELEGRAM PROFILE STYLE ===== */
 #page-profile{padding:0;margin:0 -15px}
-/* =============================================
-   PROFILE HEADER — إصلاح كامل ومتجاوب
-   ============================================= */
-
-/* الحاوية الرئيسية */
-.tg-profile-header{
-  background: var(--card);
-  margin-bottom: 8px;
-  /* لا overflow:hidden هنا حتى تظهر الصورة فوق الحد */
-  overflow: visible;
-  position: relative;
-}
-
-/* ── الغلاف ── */
-.tg-cover{
-  /* ارتفاع نسبي يعمل على كل الشاشات */
-  height: 200px;
-  position: relative;
-  overflow: hidden;          /* يخفي صورة الغلاف خارج الإطار فقط */
-  background: linear-gradient(160deg,#1a1a2e 0%,#ff4500 100%);
-  border-radius: 0;
-}
-.tg-cover-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(0,0,0,.2) 0%,rgba(0,0,0,.65) 100%);
-  z-index:2;
-}
-
-/* أزرار الغلاف العلوية */
-.tg-header-controls{
-  position:absolute;top:0;left:0;right:0;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px 16px;z-index:10;
-}
-.tg-ctrl-btn{
-  width:38px;height:38px;border-radius:50%;
-  background:rgba(0,0,0,.35);border:none;color:#fff;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;backdrop-filter:blur(8px);transition:background .2s;flex-shrink:0;
-}
+.tg-profile-header{background:var(--card);margin-bottom:8px;overflow:visible;position:relative}
+.tg-cover{height:200px;position:relative;overflow:hidden;background:linear-gradient(160deg,#1a1a2e 0%,#ff4500 100%)}
+.tg-cover-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.2) 0%,rgba(0,0,0,.65) 100%);z-index:2}
+.tg-header-controls{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:14px 16px;z-index:10}
+.tg-ctrl-btn{width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.35);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;backdrop-filter:blur(8px);transition:background .2s;flex-shrink:0}
 .tg-ctrl-btn:hover{background:rgba(0,0,0,.55)}
 .tg-top-right-btns{display:flex;gap:8px}
-
-/* اسم المستخدم داخل الغلاف — يُترك مساحة كافية لليسار */
-.tg-cover-name-wrap{
-  position:absolute;
-  bottom:14px;
-  /* RTL: الاسم على اليسار، الصورة ستكون على اليمين */
-  left:16px;
-  right:16px;
-  z-index:9;
-}
-.tg-cover-name{
-  font-size:18px;font-weight:800;color:#fff;
-  text-shadow:0 2px 8px rgba(0,0,0,.7);
-  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
-}
+.tg-cover-name-wrap{position:absolute;bottom:14px;left:16px;right:16px;z-index:9}
+.tg-cover-name{font-size:18px;font-weight:800;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.7);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .tg-cover-status{color:rgba(255,255,255,.8);font-size:12px;margin-top:3px}
-
-/* ── منطقة الأزرار + الصورة الشخصية ── */
-/* نستخدم نهجاً مختلفاً كلياً:
-   الصورة تنتمي إلى صف tg-action-btns كعنصر أول،
-   مع margin-top سالب لتبرز فوق الغلاف */
-.tg-action-btns{
-  display: flex;
-  align-items: flex-end;      /* محاذاة العناصر من الأسفل */
-  gap: 0;
-  padding: 0 12px 16px;
-  background: var(--card);
-  position: relative;
-  z-index: 5;
-}
-
-/* حاوية الصورة الشخصية — العنصر الأول في الصف */
-.tg-avatar-wrap{
-  /* تبرز للأعلى بمقدار نصف حجمها تقريباً */
-  margin-top: -46px;
-  margin-left: 12px;          /* RTL: مسافة من الأزرار */
-  margin-bottom: 4px;
-  flex-shrink: 0;
-  position: relative;
-  width: 88px;
-  height: 88px;
-  z-index: 10;
-  /* لا position:absolute — الصورة جزء من التدفق الطبيعي */
-}
-.tg-avatar-img{
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--card);
-  display: block;
-  box-shadow: 0 4px 20px rgba(0,0,0,.55);
-}
-.tg-avatar-cam{
-  position:absolute;bottom:2px;left:2px;
-  width:27px;height:27px;border-radius:50%;
-  background:var(--primary);border:2.5px solid var(--card);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;z-index:3;
-}
-
-/* أزرار الإجراءات الأربعة — تملأ المساحة المتبقية بالتساوي */
-.tg-action-btns-group{
-  display: flex;
-  flex: 1;
-  justify-content: space-around;
-  align-items: center;
-  padding-top: 12px;
-  min-width: 0;
-}
-.tg-action-btn{
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  background:none;border:none;cursor:pointer;
-  flex:1;min-width:0;
-  transition:opacity .2s;
-  padding: 0 2px;
-}
+/* صف الصورة + الأزرار */
+.tg-action-btns{display:flex;align-items:flex-end;padding:0 12px 16px;background:var(--card);position:relative;z-index:5}
+.tg-avatar-wrap{margin-top:-44px;margin-left:14px;margin-bottom:4px;flex-shrink:0;position:relative;width:88px;height:88px;z-index:10}
+.tg-avatar-img{width:88px;height:88px;border-radius:50%;object-fit:cover;border:4px solid var(--card);display:block;box-shadow:0 4px 20px rgba(0,0,0,.55)}
+.tg-avatar-cam{position:absolute;bottom:2px;left:2px;width:27px;height:27px;border-radius:50%;background:var(--primary);border:2.5px solid var(--card);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3}
+.tg-action-btns-group{display:flex;flex:1;justify-content:space-around;align-items:center;padding-top:14px;min-width:0}
+.tg-action-btn{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;cursor:pointer;flex:1;min-width:0;transition:opacity .2s;padding:0 2px}
 .tg-action-btn:active{opacity:.65}
-.tg-action-icon{
-  width:50px;height:50px;
-  border-radius:14px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;
-  transition:transform .15s;
-  flex-shrink:0;
-}
+.tg-action-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;transition:transform .15s;flex-shrink:0}
 .tg-action-btn:active .tg-action-icon{transform:scale(.92)}
-.tg-action-btn span{
-  font-size:11px;color:var(--muted);font-weight:600;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  max-width:100%;text-align:center;
-}
+.tg-action-btn span{font-size:11px;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;text-align:center}
 /* Info section */
 .tg-info-section{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:8px;overflow:hidden}
 .tg-section-title{font-size:13px;color:var(--primary);font-weight:700;padding:12px 16px 4px;letter-spacing:.2px}
@@ -3061,10 +2948,10 @@ function dismissNotifBanner(){window._phEnhReady?window._dismissNotifBanner():(w
 
       </div>
 
-      <!-- أزرار الإجراءات + الصورة الشخصية في صف واحد متجاوب -->
+      <!-- الصورة الشخصية + أزرار الإجراءات في صف واحد -->
       <div class="tg-action-btns">
 
-        <!-- الصورة الشخصية: داخل نفس الصف مع margin-top سالب للبروز فوق الغلاف -->
+        <!-- الصورة تبرز فوق الغلاف عبر margin-top سالب -->
         <div class="tg-avatar-wrap">
           <div class="avatar-frame-wrap" id="my-avatar-frame-wrap">
             <img id="my-photo"
@@ -3079,7 +2966,7 @@ function dismissNotifBanner(){window._phEnhReady?window._dismissNotifBanner():(w
           <input type="file" id="gif-upload" accept="image/gif" class="hidden" onchange="uploadImage(this)">
         </div>
 
-        <!-- الأزرار الأربعة تملأ المساحة المتبقية بالتساوي -->
+        <!-- الأزرار الأربعة تملأ المساحة المتبقية -->
         <div class="tg-action-btns-group">
           <button class="tg-action-btn" onclick="openCreateStory()">
             <div class="tg-action-icon" style="background:rgba(255,69,0,.14)">
@@ -5490,24 +5377,30 @@ function cancelRegistration(){
 function subscribeToMyProfile(){
   db.ref('users/'+currentUser.uid).on('value',snap=>{
     const d=snap.val(); if(!d)return;
-    const userName = d.fullName || 'User';
-    document.getElementById('my-name').innerText = userName;
+    document.getElementById('my-name').innerText=d.fullName||'...';
     // شارة التوثيق بجانب الاسم
     const myBadge=document.getElementById('my-verified-badge');
     if(myBadge) myBadge.innerHTML=d.isVerified?getVerifiedBadgeHTML('lg'):'';
     document.getElementById('my-username-display').innerText='@'+(d.username||'user');
     document.getElementById('my-email-display').innerText=d.email||'';
-    // الصورة الشخصية مع صورة احتياطية تحمل حرف الاسم
-    const myPhotoEl = document.getElementById('my-photo');
-    if(myPhotoEl){
-      const fallbackAvatar = 'https://ui-avatars.com/api/?name='+encodeURIComponent(userName)+'&background=ff4500&color=fff&size=200&bold=true';
-      myPhotoEl.src = d.photo && d.photo.trim() !== '' ? d.photo : fallbackAvatar;
-      myPhotoEl.onerror = function(){ this.onerror=null; this.src=fallbackAvatar; };
-    }
-    // الغلاف
-    if(d.cover && d.cover.trim() !== ''){
-      const c=document.getElementById('my-cover');
-      if(c){ c.src=d.cover; c.style.display='block'; }
+
+    // ── الصورة الشخصية ──
+    const _fallback='https://ui-avatars.com/api/?name='+encodeURIComponent(d.fullName||'User')+'&background=ff4500&color=fff&size=200&bold=true';
+    const _photoSrc = (d.photo && d.photo.trim()!=='' && d.photo!=='null') ? d.photo : _fallback;
+    const _photoEl  = document.getElementById('my-photo');
+    if(_photoEl){ _photoEl.src=_photoSrc; _photoEl.onerror=function(){this.onerror=null;this.src=_fallback;}; }
+    const _spPhoto  = document.getElementById('sp-photo');
+    if(_spPhoto && d.photo) _spPhoto.src=d.photo;
+
+    // ── صورة الغلاف ──
+    const _coverEl = document.getElementById('my-cover');
+    if(_coverEl){
+      if(d.cover && d.cover.trim()!=='' && d.cover!=='null'){
+        _coverEl.src=d.cover; _coverEl.style.display='block';
+        _coverEl.onerror=function(){this.onerror=null;this.style.display='none';};
+      } else {
+        _coverEl.src=''; _coverEl.style.display='none';
+      }
     }
     document.getElementById('edit-name').value=d.fullName||'';
     document.getElementById('edit-username').value=d.username||'';
@@ -5610,76 +5503,133 @@ function saveEditProfile(){
   setTimeout(()=>showPage('page-profile','nav-profile'), 600);
 }
 
-function epUploadCover(input){
-  if(!input.files||!input.files[0])return;
-  compressImage(input.files[0],900,300,0.75).then(b64=>{
-    db.ref('users/'+currentUser.uid).update({cover:b64}).then(()=>showToast('✓ تم تحديث الغلاف')).catch(e=>showToast('❌ فشل التحديث: '+e.message));
-    // تحديث الغلاف في صفحة البروفايل
-    const c=document.getElementById('my-cover');
-    if(c){c.src=b64;c.style.display='block';}
-    // تحديث المعاينة في صفحة التعديل
-    const ep=document.getElementById('ep-cover-preview');
-    if(ep){ep.src=b64;ep.style.display='block';}
+/* ══════════════════════════════════════════════════════════════
+   CLOUDINARY UPLOAD — بديل Firebase Storage يعمل من كل دولة
+   ══════════════════════════════════════════════════════════════
+   ⚙️  ضع بيانات حسابك هنا (مجاني على cloudinary.com):
+        CLOUD_NAME   = اسم الـ cloud الخاص بك
+        UPLOAD_PRESET= اسم unsigned upload preset أنشأته في Settings
+   ══════════════════════════════════════════════════════════════ */
+const CLOUDINARY_CLOUD  = 'dw148yeos';
+const CLOUDINARY_PRESET = 'phoenix_unsigned';
+
+function uploadToCloudinary(file, type) {
+  return new Promise((resolve, reject) => {
+    if (!currentUser) { reject(new Error('not-logged-in')); return; }
+
+    const isGif = file.type === 'image/gif';
+
+    // دالة الرفع الفعلي بعد التجهيز
+    const doUpload = (blob) => {
+      const uid  = currentUser.uid;
+      const form = new FormData();
+      form.append('file',            blob);
+      form.append('upload_preset',   CLOUDINARY_PRESET);
+      // public_id ثابت لكل مستخدم → كل رفع جديد يحلّ محل القديم تلقائياً
+      form.append('public_id',       `phoenix_users/${uid}_${type}`);
+      form.append('folder',          'phoenix_users');
+
+      fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
+        method: 'POST',
+        body:   form
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.secure_url) resolve(data.secure_url);
+        else reject(new Error(data.error?.message || 'upload-failed'));
+      })
+      .catch(reject);
+    };
+
+    if (isGif) {
+      const MAX = 5 * 1024 * 1024;
+      if (file.size > MAX) { reject(new Error('gif-too-large')); return; }
+      doUpload(file);   // GIF بدون ضغط للحفاظ على الحركة
+    } else {
+      // ضغط الصورة قبل الرفع
+      const [maxW, maxH, q] = type === 'cover' ? [1200, 400, 0.82] : [600, 600, 0.82];
+      compressImage(file, maxW, maxH, q).then(b64 => {
+        // تحويل base64 → Blob
+        const arr  = atob(b64.split(',')[1]);
+        const u8   = new Uint8Array(arr.length);
+        for (let i = 0; i < arr.length; i++) u8[i] = arr.charCodeAt(i);
+        doUpload(new Blob([u8], { type: 'image/jpeg' }));
+      }).catch(reject);
+    }
   });
 }
 
-function epUploadPhoto(input){
-  if(!input.files||!input.files[0])return;
-  const file=input.files[0];
-  const syncPreviews=(b64)=>{
-    // تحديث صورة البروفايل الرئيسية
-    const mp=document.getElementById('my-photo');if(mp)mp.src=b64;
-    // تحديث معاينة صفحة التعديل
-    const ep=document.getElementById('ep-photo-preview');if(ep)ep.src=b64;
-    // تحديث صورة الإعدادات
-    const sp=document.getElementById('sp-photo');if(sp)sp.src=b64;
-  };
-  if(file.type==='image/gif'){
-    const MAX_GIF=3*1024*1024;
-    if(file.size>MAX_GIF){showToast('حجم الـ GIF كبير جداً، الحد الأقصى 3MB');return;}
-    const reader=new FileReader();
-    reader.onload=e=>{
-      const b64=e.target.result;
-      db.ref('users/'+currentUser.uid).update({photo:b64,photoIsGif:true}).then(()=>showToast('🎉 تم تحديث الصورة المتحركة')).catch(e=>showToast('❌ فشل التحديث: '+e.message));
-      syncPreviews(b64);
-    };
-    reader.readAsDataURL(file);
-  } else {
-    compressImage(file,400,400,0.75).then(b64=>{
-      db.ref('users/'+currentUser.uid).update({photo:b64,photoIsGif:false}).then(()=>showToast('✓ تم تحديث الصورة')).catch(e=>showToast('❌ فشل التحديث: '+e.message));
-      syncPreviews(b64);
-    });
-  }
-}
-
-function uploadImage(input){
-  if(!input.files||!input.files[0])return;
-  const file=input.files[0];
-  // إذا كان الملف GIF يتم رفعه مباشرة بدون ضغط للحفاظ على الحركة
-  if(file.type==='image/gif'){
-    const MAX_GIF=3*1024*1024; // 3MB حد أقصى للـ GIF
-    if(file.size>MAX_GIF){showToast('حجم الـ GIF كبير جداً، الحد الأقصى 3MB');return;}
-    const reader=new FileReader();
-    reader.onload=e=>{
-      const b64=e.target.result;
-      db.ref('users/'+currentUser.uid).update({photo:b64,photoIsGif:true}).then(()=>{
-        showToast('🎉 تم تحديث الصورة المتحركة ✓');
-      });
-    };
-    reader.readAsDataURL(file);
-  } else {
-    compressImage(file,400,400,0.75).then(b64=>{
-      db.ref('users/'+currentUser.uid).update({photo:b64,photoIsGif:false}).then(()=>showToast('✓ تم تحديث الصورة')).catch(e=>showToast('❌ فشل التحديث: '+e.message));
-    });
-  }
-}
-
-function uploadCover(input){
-  if(!input.files||!input.files[0])return;
-  compressImage(input.files[0],900,300,0.75).then(b64=>{
-    db.ref('users/'+currentUser.uid).update({cover:b64}).then(()=>showToast('✓ تم تحديث الغلاف')).catch(e=>showToast('❌ فشل التحديث: '+e.message));
-    const c=document.getElementById('my-cover');c.src=b64;c.style.display='block';
+/* ── مزامنة الصورة في كل عناصر الواجهة ── */
+function syncPhotoUI(url) {
+  ['my-photo','ep-photo-preview','sp-photo'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.src = url;
   });
+}
+function syncCoverUI(url) {
+  ['my-cover','ep-cover-preview'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.src = url;
+    el.style.display = url ? 'block' : 'none';
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   دوال الرفع — تستخدم Cloudinary بدلاً من base64
+   ══════════════════════════════════════════════════════════════ */
+
+function uploadImage(input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  showToast('⏳ جارٍ رفع الصورة...');
+  uploadToCloudinary(file, 'photo')
+    .then(url => db.ref('users/' + currentUser.uid).update({ photo: url, photoIsGif: file.type === 'image/gif' }))
+    .then(() => {
+      const url = document.getElementById('my-photo')?.src; // أُعيد من Firebase listener
+      showToast(file.type === 'image/gif' ? '🎉 تم تحديث الصورة المتحركة ✓' : '✓ تم تحديث الصورة');
+    })
+    .catch(err => {
+      if (err.message === 'gif-too-large') showToast('حجم الـ GIF كبير جداً، الحد الأقصى 5MB');
+      else showToast('❌ فشل رفع الصورة: ' + err.message);
+    });
+}
+
+function uploadCover(input) {
+  if (!input.files || !input.files[0]) return;
+  showToast('⏳ جارٍ رفع الغلاف...');
+  uploadToCloudinary(input.files[0], 'cover')
+    .then(url => db.ref('users/' + currentUser.uid).update({ cover: url }))
+    .then(() => showToast('✓ تم تحديث الغلاف'))
+    .catch(err => showToast('❌ فشل رفع الغلاف: ' + err.message));
+}
+
+function epUploadPhoto(input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  showToast('⏳ جارٍ رفع الصورة...');
+  uploadToCloudinary(file, 'photo')
+    .then(url => db.ref('users/' + currentUser.uid).update({ photo: url, photoIsGif: file.type === 'image/gif' }).then(() => url))
+    .then(url => {
+      syncPhotoUI(url);
+      showToast(file.type === 'image/gif' ? '🎉 تم تحديث الصورة المتحركة' : '✓ تم تحديث الصورة');
+    })
+    .catch(err => {
+      if (err.message === 'gif-too-large') showToast('حجم الـ GIF كبير جداً، الحد الأقصى 5MB');
+      else showToast('❌ فشل رفع الصورة: ' + err.message);
+    });
+}
+
+function epUploadCover(input) {
+  if (!input.files || !input.files[0]) return;
+  showToast('⏳ جارٍ رفع الغلاف...');
+  uploadToCloudinary(input.files[0], 'cover')
+    .then(url => db.ref('users/' + currentUser.uid).update({ cover: url }).then(() => url))
+    .then(url => {
+      syncCoverUI(url);
+      showToast('✓ تم تحديث الغلاف');
+    })
+    .catch(err => showToast('❌ فشل رفع الغلاف: ' + err.message));
 }
 
 function logout(){
@@ -13743,57 +13693,6 @@ window._phPending = [];
     if (el) el.remove();
   };
 
-})();
-</script>
-
-<!-- ✅ PROFILE AVATAR & COVER GUARD -->
-<script>
-(function(){
-  var DEFAULT_AVATAR = function(name){
-    return 'https://ui-avatars.com/api/?name='+encodeURIComponent(name||'User')+'&background=ff4500&color=fff&size=200&bold=true';
-  };
-
-  function guardPhoto(){
-    var img = document.getElementById('my-photo');
-    if(!img) return;
-    // إذا كان المصدر فارغاً أو placeholder
-    if(!img.src || img.src==='' || img.src.includes('placeholder') || img.src==='null' || img.src==='undefined'){
-      var name = (document.getElementById('my-name')||{}).innerText||'User';
-      img.src = DEFAULT_AVATAR(name);
-    }
-    img.onerror = function(){
-      this.onerror = null;
-      var name = (document.getElementById('my-name')||{}).innerText||'User';
-      this.src = DEFAULT_AVATAR(name);
-    };
-  }
-
-  // تطبيق فور تحميل الصفحة
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded', guardPhoto);
-  } else {
-    guardPhoto();
-  }
-
-  // مراقبة التغييرات عبر Firebase
-  var obs = new MutationObserver(function(muts){
-    muts.forEach(function(m){
-      if(m.type==='attributes' && m.attributeName==='src'){
-        var img = m.target;
-        var src = img.getAttribute('src')||'';
-        if(src==='' || src==='null' || src==='undefined' || src.includes('via.placeholder')){
-          var name = (document.getElementById('my-name')||{}).innerText||'User';
-          img.src = DEFAULT_AVATAR(name);
-        }
-      }
-    });
-  });
-
-  document.addEventListener('DOMContentLoaded', function(){
-    var myPhoto = document.getElementById('my-photo');
-    if(myPhoto) obs.observe(myPhoto, {attributes:true, attributeFilter:['src']});
-    guardPhoto();
-  });
 })();
 </script>
 
