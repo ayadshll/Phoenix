@@ -1421,88 +1421,140 @@ body.lang-en .page-header,.lang-en .chat-header{flex-direction:row}
 
 /* ===== TELEGRAM PROFILE STYLE ===== */
 #page-profile{padding:0;margin:0 -15px}
-/* ===== PROFILE HEADER — RESPONSIVE FIX ===== */
+/* =============================================
+   PROFILE HEADER — إصلاح كامل ومتجاوب
+   ============================================= */
+
+/* الحاوية الرئيسية */
 .tg-profile-header{
-  background:var(--card);
-  margin-bottom:8px;
-  /* overflow visible حتى لا تُخفي الصورة الدائرية البارزة */
-  overflow:visible;
-  position:relative;
+  background: var(--card);
+  margin-bottom: 8px;
+  /* لا overflow:hidden هنا حتى تظهر الصورة فوق الحد */
+  overflow: visible;
+  position: relative;
 }
 
-/* الغلاف: ارتفاع نسبي بدلاً من قيمة ثابتة */
+/* ── الغلاف ── */
 .tg-cover{
-  height:clamp(160px, 36vw, 230px);
-  position:relative;
-  overflow:hidden;
-  background:linear-gradient(160deg,#1a1a2e 0%,#ff4500 100%);
+  /* ارتفاع نسبي يعمل على كل الشاشات */
+  height: 200px;
+  position: relative;
+  overflow: hidden;          /* يخفي صورة الغلاف خارج الإطار فقط */
+  background: linear-gradient(160deg,#1a1a2e 0%,#ff4500 100%);
+  border-radius: 0;
 }
-.tg-cover-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.25) 0%,rgba(0,0,0,.7) 100%);z-index:2}
-.tg-header-controls{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:14px 16px;z-index:10}
-.tg-ctrl-btn{width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.3);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;backdrop-filter:blur(8px);transition:background .2s;flex-shrink:0}
+.tg-cover-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,.2) 0%,rgba(0,0,0,.65) 100%);
+  z-index:2;
+}
+
+/* أزرار الغلاف العلوية */
+.tg-header-controls{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 16px;z-index:10;
+}
+.tg-ctrl-btn{
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(0,0,0,.35);border:none;color:#fff;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;backdrop-filter:blur(8px);transition:background .2s;flex-shrink:0;
+}
 .tg-ctrl-btn:hover{background:rgba(0,0,0,.55)}
 .tg-top-right-btns{display:flex;gap:8px}
 
-/* الصورة الدائرية: تتموضع دائماً في الزاوية السفلى للغلاف بشكل متناسق */
-.tg-avatar-wrap{
-  position:absolute;
-  /* تثبيتها في الجزء السفلي من الغلاف بقيمة متجاوبة */
-  bottom:calc(-1 * clamp(40px, 10vw, 50px));
-  right:clamp(12px, 4vw, 20px);
-  width:clamp(76px, 20vw, 92px);
-  height:clamp(76px, 20vw, 92px);
-  z-index:20;
-}
-.tg-avatar-img{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  object-fit:cover;
-  border:4px solid var(--card);
-  display:block;
-  box-shadow:0 4px 24px rgba(0,0,0,.5);
-}
-.tg-avatar-cam{position:absolute;bottom:2px;left:2px;width:27px;height:27px;border-radius:50%;background:var(--primary);border:2.5px solid var(--card);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3}
-
-/* اسم المستخدم على الغلاف: يبقى بعيداً عن الصورة الدائرية */
+/* اسم المستخدم داخل الغلاف — يُترك مساحة كافية لليسار */
 .tg-cover-name-wrap{
   position:absolute;
   bottom:14px;
+  /* RTL: الاسم على اليسار، الصورة ستكون على اليمين */
   left:16px;
-  /* مسافة يمين ديناميكية = حجم الصورة + هامش */
-  right:calc(clamp(76px, 20vw, 92px) + clamp(12px, 4vw, 20px) + 10px);
+  right:16px;
   z-index:9;
 }
-.tg-cover-name{font-size:clamp(15px,4.5vw,20px);font-weight:800;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.tg-cover-status{color:rgba(255,255,255,.75);font-size:12px;margin-top:3px}
-
-/* أزرار الإجراءات: padding-top يعوّض الصورة البارزة أسفل الغلاف */
-.tg-action-btns{
-  display:flex;
-  gap:4px;
-  padding-top:calc(clamp(40px, 10vw, 50px) + 12px);
-  padding-bottom:18px;
-  padding-right:16px;
-  padding-left:16px;
-  justify-content:space-around;
-  background:var(--card);
-  /* لا overflow:hidden حتى لا تُخفي الصورة البارزة */
+.tg-cover-name{
+  font-size:18px;font-weight:800;color:#fff;
+  text-shadow:0 2px 8px rgba(0,0,0,.7);
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
 }
-.tg-action-btn{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:none;cursor:pointer;flex:1;min-width:0;transition:opacity .2s}
-.tg-action-btn:active{opacity:.65}
+.tg-cover-status{color:rgba(255,255,255,.8);font-size:12px;margin-top:3px}
 
-/* أيقونات الأزرار متجاوبة مع حجم الشاشة */
-.tg-action-icon{
-  width:clamp(44px, 13vw, 54px);
-  height:clamp(44px, 13vw, 54px);
-  border-radius:16px;
+/* ── منطقة الأزرار + الصورة الشخصية ── */
+/* نستخدم نهجاً مختلفاً كلياً:
+   الصورة تنتمي إلى صف tg-action-btns كعنصر أول،
+   مع margin-top سالب لتبرز فوق الغلاف */
+.tg-action-btns{
+  display: flex;
+  align-items: flex-end;      /* محاذاة العناصر من الأسفل */
+  gap: 0;
+  padding: 0 12px 16px;
+  background: var(--card);
+  position: relative;
+  z-index: 5;
+}
+
+/* حاوية الصورة الشخصية — العنصر الأول في الصف */
+.tg-avatar-wrap{
+  /* تبرز للأعلى بمقدار نصف حجمها تقريباً */
+  margin-top: -46px;
+  margin-left: 12px;          /* RTL: مسافة من الأزرار */
+  margin-bottom: 4px;
+  flex-shrink: 0;
+  position: relative;
+  width: 88px;
+  height: 88px;
+  z-index: 10;
+  /* لا position:absolute — الصورة جزء من التدفق الطبيعي */
+}
+.tg-avatar-img{
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--card);
+  display: block;
+  box-shadow: 0 4px 20px rgba(0,0,0,.55);
+}
+.tg-avatar-cam{
+  position:absolute;bottom:2px;left:2px;
+  width:27px;height:27px;border-radius:50%;
+  background:var(--primary);border:2.5px solid var(--card);
   display:flex;align-items:center;justify-content:center;
-  font-size:clamp(17px, 5vw, 21px);
+  cursor:pointer;z-index:3;
+}
+
+/* أزرار الإجراءات الأربعة — تملأ المساحة المتبقية بالتساوي */
+.tg-action-btns-group{
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 12px;
+  min-width: 0;
+}
+.tg-action-btn{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  background:none;border:none;cursor:pointer;
+  flex:1;min-width:0;
+  transition:opacity .2s;
+  padding: 0 2px;
+}
+.tg-action-btn:active{opacity:.65}
+.tg-action-icon{
+  width:50px;height:50px;
+  border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
   transition:transform .15s;
   flex-shrink:0;
 }
 .tg-action-btn:active .tg-action-icon{transform:scale(.92)}
-.tg-action-btn span{font-size:clamp(10px,2.8vw,11px);color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;text-align:center}
+.tg-action-btn span{
+  font-size:11px;color:var(--muted);font-weight:600;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  max-width:100%;text-align:center;
+}
 /* Info section */
 .tg-info-section{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:8px;overflow:hidden}
 .tg-section-title{font-size:13px;color:var(--primary);font-weight:700;padding:12px 16px 4px;letter-spacing:.2px}
@@ -3009,45 +3061,52 @@ function dismissNotifBanner(){window._phEnhReady?window._dismissNotifBanner():(w
 
       </div>
 
-      <!-- الصورة الشخصية (خارج tg-cover لتجنب overflow:hidden) -->
-      <div class="tg-avatar-wrap">
-        <div class="avatar-frame-wrap" id="my-avatar-frame-wrap">
-          <img id="my-photo" src="https://ui-avatars.com/api/?name=User&background=ff4500&color=fff&size=200&bold=true" class="tg-avatar-img"
-               onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=User&background=ff4500&color=fff&size=200&bold=true'">
-        </div>
-        <label for="img-upload" class="tg-avatar-cam" title="تغيير الصورة">
-          <i class="fas fa-camera" style="font-size:11px;color:#fff"></i>
-        </label>
-        <input type="file" id="img-upload" accept="image/*,image/gif" class="hidden" onchange="uploadImage(this)">
-        <input type="file" id="gif-upload" accept="image/gif" class="hidden" onchange="uploadImage(this)">
-      </div>
-
-      <!-- أزرار الإجراءات الرئيسية (تليغرام ستايل) -->
+      <!-- أزرار الإجراءات + الصورة الشخصية في صف واحد متجاوب -->
       <div class="tg-action-btns">
-        <button class="tg-action-btn" onclick="openCreateStory()">
-          <div class="tg-action-icon" style="background:rgba(255,69,0,.14)">
-            <i class="fas fa-circle-plus" style="color:var(--primary)"></i>
+
+        <!-- الصورة الشخصية: داخل نفس الصف مع margin-top سالب للبروز فوق الغلاف -->
+        <div class="tg-avatar-wrap">
+          <div class="avatar-frame-wrap" id="my-avatar-frame-wrap">
+            <img id="my-photo"
+              src="https://ui-avatars.com/api/?name=User&background=ff4500&color=fff&size=200&bold=true"
+              class="tg-avatar-img"
+              onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=User&background=ff4500&color=fff&size=200&bold=true'">
           </div>
-          <span data-i18n="story">ستوري</span>
-        </button>
-        <button class="tg-action-btn" onclick="openCreatePost()">
-          <div class="tg-action-icon" style="background:rgba(16,185,129,.14)">
-            <i class="fas fa-images" style="color:var(--accent)"></i>
-          </div>
-          <span data-i18n="post">منشور</span>
-        </button>
-        <button class="tg-action-btn" onclick="showPage('page-messages','nav-messages')">
-          <div class="tg-action-icon" style="background:rgba(59,130,246,.14)">
-            <i class="fas fa-comment-dots" style="color:#60a5fa"></i>
-          </div>
-          <span>رسائل</span>
-        </button>
-        <button class="tg-action-btn" onclick="openEditProfile()">
-          <div class="tg-action-icon" style="background:rgba(139,92,246,.14)">
-            <i class="fas fa-pen" style="color:#a78bfa"></i>
-          </div>
-          <span>تعديل</span>
-        </button>
+          <label for="img-upload" class="tg-avatar-cam" title="تغيير الصورة">
+            <i class="fas fa-camera" style="font-size:11px;color:#fff"></i>
+          </label>
+          <input type="file" id="img-upload" accept="image/*,image/gif" class="hidden" onchange="uploadImage(this)">
+          <input type="file" id="gif-upload" accept="image/gif" class="hidden" onchange="uploadImage(this)">
+        </div>
+
+        <!-- الأزرار الأربعة تملأ المساحة المتبقية بالتساوي -->
+        <div class="tg-action-btns-group">
+          <button class="tg-action-btn" onclick="openCreateStory()">
+            <div class="tg-action-icon" style="background:rgba(255,69,0,.14)">
+              <i class="fas fa-circle-plus" style="color:var(--primary)"></i>
+            </div>
+            <span data-i18n="story">ستوري</span>
+          </button>
+          <button class="tg-action-btn" onclick="openCreatePost()">
+            <div class="tg-action-icon" style="background:rgba(16,185,129,.14)">
+              <i class="fas fa-images" style="color:var(--accent)"></i>
+            </div>
+            <span data-i18n="post">منشور</span>
+          </button>
+          <button class="tg-action-btn" onclick="showPage('page-messages','nav-messages')">
+            <div class="tg-action-icon" style="background:rgba(59,130,246,.14)">
+              <i class="fas fa-comment-dots" style="color:#60a5fa"></i>
+            </div>
+            <span>رسائل</span>
+          </button>
+          <button class="tg-action-btn" onclick="openEditProfile()">
+            <div class="tg-action-icon" style="background:rgba(139,92,246,.14)">
+              <i class="fas fa-pen" style="color:#a78bfa"></i>
+            </div>
+            <span>تعديل</span>
+          </button>
+        </div>
+
       </div>
     </div>
 
@@ -5431,14 +5490,25 @@ function cancelRegistration(){
 function subscribeToMyProfile(){
   db.ref('users/'+currentUser.uid).on('value',snap=>{
     const d=snap.val(); if(!d)return;
-    document.getElementById('my-name').innerText=d.fullName||'...';
+    const userName = d.fullName || 'User';
+    document.getElementById('my-name').innerText = userName;
     // شارة التوثيق بجانب الاسم
     const myBadge=document.getElementById('my-verified-badge');
     if(myBadge) myBadge.innerHTML=d.isVerified?getVerifiedBadgeHTML('lg'):'';
     document.getElementById('my-username-display').innerText='@'+(d.username||'user');
     document.getElementById('my-email-display').innerText=d.email||'';
-    document.getElementById('my-photo').src=d.photo||'https://ui-avatars.com/api/?name='+(encodeURIComponent(d.fullName||'User'))+'&background=ff4500&color=fff&size=200&bold=true';
-    if(d.cover){const c=document.getElementById('my-cover');c.src=d.cover;c.style.display='block'}
+    // الصورة الشخصية مع صورة احتياطية تحمل حرف الاسم
+    const myPhotoEl = document.getElementById('my-photo');
+    if(myPhotoEl){
+      const fallbackAvatar = 'https://ui-avatars.com/api/?name='+encodeURIComponent(userName)+'&background=ff4500&color=fff&size=200&bold=true';
+      myPhotoEl.src = d.photo && d.photo.trim() !== '' ? d.photo : fallbackAvatar;
+      myPhotoEl.onerror = function(){ this.onerror=null; this.src=fallbackAvatar; };
+    }
+    // الغلاف
+    if(d.cover && d.cover.trim() !== ''){
+      const c=document.getElementById('my-cover');
+      if(c){ c.src=d.cover; c.style.display='block'; }
+    }
     document.getElementById('edit-name').value=d.fullName||'';
     document.getElementById('edit-username').value=d.username||'';
     document.getElementById('edit-bio').value=d.bio||'';
@@ -13676,49 +13746,53 @@ window._phPending = [];
 })();
 </script>
 
-<!-- ✅ PROFILE AVATAR FALLBACK PATCH -->
+<!-- ✅ PROFILE AVATAR & COVER GUARD -->
 <script>
-(function() {
-  var DEFAULT_AVATAR_BASE = 'https://ui-avatars.com/api/?background=ff4500&color=fff&size=200&bold=true&name=';
+(function(){
+  var DEFAULT_AVATAR = function(name){
+    return 'https://ui-avatars.com/api/?name='+encodeURIComponent(name||'User')+'&background=ff4500&color=fff&size=200&bold=true';
+  };
 
-  function applyAvatarFallback(imgEl) {
-    if (!imgEl) return;
-    imgEl.addEventListener('error', function() {
-      // استخدام اسم المستخدم الحالي إن أمكن
-      var name = document.getElementById('my-name');
-      var userName = (name && name.innerText && name.innerText !== '...') ? name.innerText : 'User';
-      imgEl.onerror = null; // منع حلقة لا نهائية
-      imgEl.src = DEFAULT_AVATAR_BASE + encodeURIComponent(userName);
-    });
+  function guardPhoto(){
+    var img = document.getElementById('my-photo');
+    if(!img) return;
+    // إذا كان المصدر فارغاً أو placeholder
+    if(!img.src || img.src==='' || img.src.includes('placeholder') || img.src==='null' || img.src==='undefined'){
+      var name = (document.getElementById('my-name')||{}).innerText||'User';
+      img.src = DEFAULT_AVATAR(name);
+    }
+    img.onerror = function(){
+      this.onerror = null;
+      var name = (document.getElementById('my-name')||{}).innerText||'User';
+      this.src = DEFAULT_AVATAR(name);
+    };
   }
 
-  // تطبيق الحماية فور تحميل الصفحة
-  document.addEventListener('DOMContentLoaded', function() {
-    applyAvatarFallback(document.getElementById('my-photo'));
-  });
+  // تطبيق فور تحميل الصفحة
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', guardPhoto);
+  } else {
+    guardPhoto();
+  }
 
-  // حماية إضافية: كل مرة يُعيَّن src للصورة عبر JS
-  var _originalSubscribeObserver = null;
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(m) {
-      if (m.type === 'attributes' && m.attributeName === 'src') {
+  // مراقبة التغييرات عبر Firebase
+  var obs = new MutationObserver(function(muts){
+    muts.forEach(function(m){
+      if(m.type==='attributes' && m.attributeName==='src'){
         var img = m.target;
-        var src = img.getAttribute('src');
-        // إذا كان المصدر فارغاً أو placeholder أو data: فارغة
-        if (!src || src === '' || src.includes('via.placeholder') || src === 'undefined' || src === 'null') {
-          var name = document.getElementById('my-name');
-          var userName = (name && name.innerText && name.innerText !== '...') ? name.innerText : 'User';
-          img.src = DEFAULT_AVATAR_BASE + encodeURIComponent(userName);
+        var src = img.getAttribute('src')||'';
+        if(src==='' || src==='null' || src==='undefined' || src.includes('via.placeholder')){
+          var name = (document.getElementById('my-name')||{}).innerText||'User';
+          img.src = DEFAULT_AVATAR(name);
         }
       }
     });
   });
 
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function(){
     var myPhoto = document.getElementById('my-photo');
-    if (myPhoto) {
-      observer.observe(myPhoto, { attributes: true, attributeFilter: ['src'] });
-    }
+    if(myPhoto) obs.observe(myPhoto, {attributes:true, attributeFilter:['src']});
+    guardPhoto();
   });
 })();
 </script>
